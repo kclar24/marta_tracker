@@ -24,11 +24,11 @@
   <%= @location.city %>
 </p>
 
+<p>
+  There are <%= @nearby_buses.count %> buses near you!
+</p>
+
 <div id="map-canvas"></div>
-
-<% @nearby_buses.each do |bus| %>
-
-<% end %>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
@@ -47,8 +47,21 @@
     var myMarker = new google.maps.Marker({
       position: myLatLng,
       map: map,
-      animation: google.maps.Animation.DROP,
+      animation: google.maps.Animation.BOUNCE,
       title: "Your Location"
+    })
+
+    var nearby_buses = <%= raw @nearby_buses.to_json %>
+
+    nearby_buses.forEach(function(bus) {
+      var busLatLng = new google.maps.LatLng(bus["LATITUDE"], bus["LONGITUDE"])
+
+      var busMarker = new google.maps.Marker({
+        position: busLatLng,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: bus["VEHICLE"]
+      })
     })
   }
 
