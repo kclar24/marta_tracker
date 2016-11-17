@@ -28,6 +28,12 @@
   There are <%= @nearby_buses.count %> buses near you!
 </p>
 
+<% if @nearby_buses.count == 0 %>
+  <p>
+    Better start walking...
+  </p>
+<% end %>
+
 <div id="map-canvas"></div>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
