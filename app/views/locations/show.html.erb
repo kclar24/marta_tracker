@@ -62,6 +62,18 @@
         animation: google.maps.Animation.DROP,
         title: bus["VEHICLE"]
       })
+
+      var contents = '<div id="content">' +
+        '<h2>Bus ' + bus['VEHICLE'] + ' '+ bus['DIRECTION'] + '</h2>' + '<div id="bodyContent">'+ '<p>Next Stop: ' + bus['TIMEPOINT'] +'</p>'+ '</div>'+
+        '</div>'
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: contents
+      })
+
+      google.maps.event.addListener(busMarker, 'click', function() {
+        infoWindow.open(map, busMarker)
+      })
     })
   }
 
