@@ -21,7 +21,7 @@ class LocationsController < ApplicationController
     @nearby_buses = []
 
     @buses.each do |bus|
-      if is_nearby?(@location.latitude,                 @location.longitude, bus["LATTUDE"].to_f, bus["LONGITUDE"].to_f)
+      if is_nearby?(@location.latitude, @location.longitude, bus["LATTUDE"].to_f, bus["LONGITUDE"].to_f)
         @nearby_buses.push(bus)
       end
     end
